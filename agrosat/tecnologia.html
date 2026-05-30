@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroSat — Tecnologia</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── NAVEGAÇÃO ── -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo"><span></span> AgroSat</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Problema</a></li>
+      <li><a href="tecnologia.html">Tecnologia</a></li>
+      <li><a href="objetivos.html">Objetivos</a></li>
+      <li><a href="beneficios.html">Benefícios</a></li>
+      <li><a href="aplicacao.html">Aplicação</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mobile">
+    <a href="index.html">Problema</a>
+    <a href="tecnologia.html">Tecnologia</a>
+    <a href="objetivos.html">Objetivos</a>
+    <a href="beneficios.html">Benefícios</a>
+    <a href="aplicacao.html">Aplicação</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section class="hero" style="min-height: 55vh;">
+    <div class="hero-grade"></div>
+    <div class="container">
+      <div class="hero-conteudo">
+        <div class="hero-tag">🔬 Stack Tecnológico</div>
+        <h1 class="hero-titulo">
+          Como o <em>espaço</em><br/>chega até o campo
+        </h1>
+        <p class="hero-desc">
+          Combinamos dados orbitais abertos, IoT embarcado e análise inteligente
+          para entregar informação precisa onde e quando o agricultor precisa.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DIAGRAMA DE ARQUITETURA ── -->
+  <section class="secao-destaque">
+    <div class="container">
+      <div class="secao-header revelar">
+        <div class="tag">🏗️ Arquitetura da Solução</div>
+        <h2 class="secao-titulo">Do satélite ao celular do agricultor</h2>
+        <p class="secao-sub">
+          O fluxo completo de dados — da captura orbital até a decisão no campo —
+          em uma arquitetura simples, aberta e escalável.
+        </p>
+      </div>
+
+      <div class="diagrama revelar">
+        <div class="diagrama-item">
+          <div class="diagrama-icone">🛰️</div>
+          <div class="diagrama-label">Satélite INPE / ESA</div>
+        </div>
+        <div class="diagrama-seta">→</div>
+        <div class="diagrama-item">
+          <div class="diagrama-icone">☁️</div>
+          <div class="diagrama-label">API NASA / Copernicus</div>
+        </div>
+        <div class="diagrama-seta">→</div>
+        <div class="diagrama-item">
+          <div class="diagrama-icone">🧠</div>
+          <div class="diagrama-label">Processamento NDVI</div>
+        </div>
+        <div class="diagrama-seta">→</div>
+        <div class="diagrama-item">
+          <div class="diagrama-icone">🖥️</div>
+          <div class="diagrama-label">Back-end FIWARE</div>
+        </div>
+        <div class="diagrama-seta">→</div>
+        <div class="diagrama-item">
+          <div class="diagrama-icone">📱</div>
+          <div class="diagrama-label">App do Agricultor</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TECNOLOGIAS ── -->
+  <section>
+    <div class="container">
+      <div class="secao-header revelar">
+        <div class="tag">⚙️ Tecnologias Utilizadas</div>
+        <h2 class="secao-titulo">Cada peça com um propósito</h2>
+      </div>
+
+      <div class="grid-2">
+        <div class="card revelar">
+          <div class="card-icone">🛰️</div>
+          <h3 class="card-titulo">Satélites INPE, ESA & NASA</h3>
+          <p class="card-desc">
+            Imagens multiespectrais gratuitas dos satélites Sentinel-2 (ESA) e
+            Landsat (NASA) com resolução de 10 metros. O INPE disponibiliza dados
+            específicos do território brasileiro via API pública. Capturam a
+            reflectância da vegetação em diferentes comprimentos de onda.
+          </p>
+        </div>
+        <div class="card revelar">
+          <div class="card-icone">🌿</div>
+          <h3 class="card-titulo">Índice NDVI</h3>
+          <p class="card-desc">
+            O Normalized Difference Vegetation Index mede a saúde da vegetação
+            usando a diferença entre luz infravermelha e vermelha refletida.
+            Valores entre -1 e +1 indicam desde solo exposto (0) até vegetação
+            densa e saudável (+0.8). Cálculo simples com dados orbitais.
+          </p>
+        </div>
+        <div class="card revelar">
+          <div class="card-icone">📡</div>
+          <h3 class="card-titulo">IoT via Satélite (MQTT)</h3>
+          <p class="card-desc">
+            Sensores ESP32 no solo coletam umidade, temperatura e luminosidade
+            e transmitem via protocolo MQTT através de módulos de comunicação
+            satelital. Permite cobertura em regiões remotas sem infraestrutura
+            de internet terrestre — funcionando até no Cerrado profundo.
+          </p>
+        </div>
+        <div class="card revelar">
+          <div class="card-icone">🏗️</div>
+          <h3 class="card-titulo">FIWARE como Back-End</h3>
+          <p class="card-desc">
+            A plataforma FIWARE (usada pela União Europeia em projetos de cidades
+            inteligentes) gerencia o contexto dos dados em tempo real via Orion
+            Context Broker. Permite armazenar, consultar e notificar sobre
+            mudanças nos dados dos sensores e das imagens satelitais.
+          </p>
+        </div>
+        <div class="card revelar">
+          <div class="card-icone">🐍</div>
+          <h3 class="card-titulo">Python para Análise de Dados</h3>
+          <p class="card-desc">
+            Scripts Python processam as imagens satelitais, calculam o NDVI,
+            detectam anomalias e geram alertas. Bibliotecas como NumPy, Pandas
+            e Rasterio permitem análise eficiente de grandes volumes de
+            dados geoespaciais com lógica de threshold configurável.
+          </p>
+        </div>
+        <div class="card revelar">
+          <div class="card-icone">📊</div>
+          <h3 class="card-titulo">Dashboard Web (HTML/CSS/JS)</h3>
+          <p class="card-desc">
+            Interface responsiva que exibe mapas de calor NDVI, gráficos
+            históricos de vegetação, alertas em tempo real e recomendações
+            de irrigação. Acessível via browser — sem necessidade de
+            instalação. Funciona em celular de entrada.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MOCKUP ── -->
+  <section class="secao-destaque">
+    <div class="container">
+      <div class="secao-header revelar">
+        <div class="tag">🖥️ Interface</div>
+        <h2 class="secao-titulo">O dashboard em ação</h2>
+        <p class="secao-sub">
+          Dados orbitais apresentados de forma clara e acionável para o agricultor.
+        </p>
+      </div>
+      <div class="mockup revelar">
+        <div class="mockup-barra">
+          <div class="mockup-circulo"></div>
+          <div class="mockup-circulo"></div>
+          <div class="mockup-circulo"></div>
+          <div class="mockup-url">agrosat.app/dashboard</div>
+        </div>
+        <div class="mockup-corpo">
+          <div class="mockup-cards">
+            <div class="mockup-card">
+              <div class="mockup-card-val">0.74</div>
+              <div class="mockup-card-label">NDVI médio — Talhão A</div>
+            </div>
+            <div class="mockup-card">
+              <div class="mockup-card-val">68%</div>
+              <div class="mockup-card-label">Umidade do solo</div>
+            </div>
+            <div class="mockup-card" style="border-color: rgba(245,200,66,0.4);">
+              <div class="mockup-card-val" style="color: var(--cor-alerta);">⚠ 0.41</div>
+              <div class="mockup-card-label">NDVI baixo — Talhão C</div>
+            </div>
+          </div>
+          <div class="mockup-grafico">
+            <div class="mockup-barra-g" style="height:45%"></div>
+            <div class="mockup-barra-g" style="height:60%"></div>
+            <div class="mockup-barra-g" style="height:55%"></div>
+            <div class="mockup-barra-g destaque" style="height:80%"></div>
+            <div class="mockup-barra-g" style="height:70%"></div>
+            <div class="mockup-barra-g" style="height:65%"></div>
+            <div class="mockup-barra-g" style="height:75%"></div>
+            <div class="mockup-barra-g destaque" style="height:90%"></div>
+            <div class="mockup-barra-g" style="height:50%"></div>
+            <div class="mockup-barra-g" style="height:40%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RODAPÉ ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">AgroSat</div>
+          <p class="footer-desc">Plataforma de agricultura de precisão via satélite. Dados orbitais a serviço do campo.</p>
+        </div>
+        <div>
+          <div class="footer-col-titulo">Páginas</div>
+          <nav class="footer-links">
+            <a href="index.html">Problema</a>
+            <a href="tecnologia.html">Tecnologia</a>
+            <a href="objetivos.html">Objetivos</a>
+            <a href="beneficios.html">Benefícios</a>
+            <a href="aplicacao.html">Aplicação</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer-col-titulo">Tecnologias</div>
+          <nav class="footer-links">
+            <a href="#">API NASA / INPE</a>
+            <a href="#">Índice NDVI</a>
+            <a href="#">IoT via Satélite</a>
+            <a href="#">FIWARE</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 AgroSat · FIAP Engenharia de Software · 1º Ano</p>
+        <div class="footer-tags">
+          <span class="footer-tag">ODS 2</span>
+          <span class="footer-tag">ODS 13</span>
+          <span class="footer-tag">Global Solution 2026</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
