@@ -1,8 +1,3 @@
-// =============================================
-// AGROSAT — JavaScript Principal
-// Navbar, Scroll, Animações, Barras de Progresso
-// =============================================
-
 document.addEventListener('DOMContentLoaded', () => {
 
   // ── Navbar: scroll ──

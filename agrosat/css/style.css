@@ -1,12 +1,6 @@
-/* =============================================
-   AGROSAT — CSS Principal
-   Variáveis, Componentes, Animações, Responsivo
-   ============================================= */
-
-/* ── GOOGLE FONTS ── */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
-/* ── VARIÁVEIS ── */
+/*VARIÁVEIS*/
 :root {
   --cor-fundo:        #060d0a;
   --cor-fundo-2:      #0b1710;
@@ -32,7 +26,7 @@
   --max-width: 1200px;
 }
 
-/* ── BASE ── */
+/*BASE*/
 body {
   font-family: var(--fonte-corpo);
   background-color: var(--cor-fundo);
@@ -41,7 +35,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ── TEXTURA DE FUNDO ── */
+/*TEXTURA DE FUNDO*/
 body::before {
   content: '';
   position: fixed;
@@ -53,16 +47,14 @@ body::before {
   z-index: 0;
 }
 
-/* ── CONTAINER ── */
+/*CONTAINER */
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-/* =============================================
-   NAVEGAÇÃO
-   ============================================= */
+/*NAVEGAÇÃO*/
 .navbar {
   position: fixed;
   top: 0;
@@ -162,7 +154,7 @@ body::before {
 .nav-hamburger.aberto span:nth-child(2) { opacity: 0; }
 .nav-hamburger.aberto span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-/* ── Menu Mobile ── */
+/*Menu Mobile*/
 .nav-mobile {
   display: none;
   position: fixed;
@@ -193,9 +185,7 @@ body::before {
 
 .nav-mobile a:hover { color: var(--cor-verde); }
 
-/* =============================================
-   HERO
-   ============================================= */
+/*HERO*/
 .hero {
   min-height: 100vh;
   display: flex;
@@ -358,8 +348,6 @@ body::before {
   animation: fadeUp 0.6s ease 0.4s both;
 }
 
-.stat-item {}
-
 .stat-num {
   font-family: var(--fonte-titulo);
   font-size: 2rem;
@@ -376,9 +364,7 @@ body::before {
   letter-spacing: 0.06em;
 }
 
-/* =============================================
-   SEÇÕES GERAIS
-   ============================================= */
+/*SEÇÕES GERAIS*/
 section {
   padding: 6rem 0;
   position: relative;
@@ -417,9 +403,7 @@ section {
   margin-bottom: 1rem;
 }
 
-/* =============================================
-   CARDS
-   ============================================= */
+/*CARDS*/
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -497,7 +481,7 @@ section {
   font-weight: 300;
 }
 
-/* ── Card destaque ── */
+/*Card destaque*/
 .card-destaque {
   background: linear-gradient(135deg, var(--cor-verde-suave), rgba(45,235,122,0.05));
   border-color: rgba(45,235,122,0.3);
@@ -518,9 +502,7 @@ section {
   font-weight: 300;
 }
 
-/* =============================================
-   DIAGRAMA DE ARQUITETURA
-   ============================================= */
+/*DIAGRAMA DE ARQUITETURA*/
 .diagrama {
   display: flex;
   align-items: center;
@@ -575,9 +557,7 @@ section {
   opacity: 0.5;
 }
 
-/* =============================================
-   TIMELINE
-   ============================================= */
+/*TIMELINE*/
 .timeline {
   position: relative;
   padding-left: 2rem;
@@ -643,9 +623,7 @@ section {
   max-width: 500px;
 }
 
-/* =============================================
-   BARRA DE PROGRESSO
-   ============================================= */
+/*BARRA DE PROGRESSO*/
 .progresso-item {
   margin-bottom: 1.8rem;
 }
@@ -684,9 +662,7 @@ section {
   transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* =============================================
-   ODS BADGES
-   ============================================= */
+/*ODS BADGES*/
 .ods-grid {
   display: flex;
   gap: 1rem;
@@ -717,9 +693,7 @@ section {
   color: var(--cor-verde);
 }
 
-/* =============================================
-   MOCKUP DE DASHBOARD
-   ============================================= */
+/*MOCKUP DE DASHBOARD*/
 .mockup {
   background: var(--cor-fundo-card);
   border: 1px solid var(--cor-borda);
@@ -809,9 +783,7 @@ section {
 .mockup-barra-g:hover { background: var(--cor-verde); }
 .mockup-barra-g.destaque { background: rgba(45,235,122,0.6); }
 
-/* =============================================
-   RODAPÉ
-   ============================================= */
+/*RODAPÉ*/
 footer {
   background: var(--cor-fundo-2);
   border-top: 1px solid var(--cor-borda);
@@ -896,18 +868,14 @@ footer {
   font-weight: 500;
 }
 
-/* =============================================
-   SEÇÃO DESTACADA (fundo alternado)
-   ============================================= */
+/*SEÇÃO DESTACADA (fundo alternado)*/
 .secao-destaque {
   background: var(--cor-fundo-2);
   border-top: 1px solid var(--cor-borda);
   border-bottom: 1px solid var(--cor-borda);
 }
 
-/* =============================================
-   PERFIS / USUÁRIOS
-   ============================================= */
+/*PERFIS / USUÁRIOS*/
 .perfil {
   display: flex;
   align-items: flex-start;
@@ -956,9 +924,7 @@ footer {
   font-weight: 300;
 }
 
-/* =============================================
-   ANIMAÇÕES
-   ============================================= */
+/*ANIMAÇÕES*/
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -990,9 +956,7 @@ footer {
   transform: translateY(0);
 }
 
-/* =============================================
-   RESPONSIVO — TABLET
-   ============================================= */
+/*RESPONSIVO — TABLET*/
 @media (max-width: 900px) {
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -1012,9 +976,7 @@ footer {
   .mockup-cards { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* =============================================
-   RESPONSIVO — MOBILE
-   ============================================= */
+/*RESPONSIVO — MOBILE*/
 @media (max-width: 600px) {
   .container { padding: 0 1.2rem; }
 
