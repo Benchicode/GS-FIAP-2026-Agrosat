@@ -16,7 +16,6 @@ Michel Lima Benchimol - RM567345
 ## Páginas
 
 | Página | Descrição |
-|--------|-----------|
 | `index.html` | O Problema — contexto, dados de impacto, ODS |
 | `tecnologia.html` | Tecnologia — stack, arquitetura, diagrama, mockup |
 | `objetivos.html` | Objetivos — metas do projeto, barras de progresso |

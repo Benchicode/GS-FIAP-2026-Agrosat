@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ── Navbar: scroll ──
+  // Navbar: scroll
   const navbar = document.querySelector('.navbar');
   if (navbar) {
     window.addEventListener('scroll', () => {
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── Navbar: link ativo ──
+  // Navbar: link ativo
   const pagAtual = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a, .nav-mobile a').forEach(link => {
     const href = link.getAttribute('href');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ── Hamburger mobile ──
+  // Hamburger mobile
   const hamburger = document.querySelector('.nav-hamburger');
   const navMobile = document.querySelector('.nav-mobile');
   if (hamburger && navMobile) {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── Intersection Observer: revelar elementos ──
+  // Intersection Observer: revelar elementos
   const observador = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observador.observe(el);
   });
 
-  // ── Barras de Progresso animadas ──
+  // Barras de Progresso animadas
   const observadorBarra = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observadorBarra.observe(item);
   });
 
-  // ── Contador animado ──
+  // Contador animado
   function animarContador(el, destino, duracao = 1500) {
     const inicio = performance.now();
     const inicioVal = 0;
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observadorContador.observe(el);
   });
 
-  // ── Hover nos cards do mockup ──
+  // Hover nos cards do mockup
   document.querySelectorAll('.mockup-barra-g').forEach(barra => {
     const alturas = [40, 60, 35, 75, 50, 85, 45, 70, 55, 90];
     const i = Math.floor(Math.random() * alturas.length);
