@@ -3,31 +3,396 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgroSat — O Problema</title>
+  <title>AgroSat — Beta</title>
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/beta.css" />
+  <style>
+    /* ── BETA PAGE STYLES ── */
+    .beta-hero {
+      padding: 7rem 0 3rem;
+      background: var(--cor-fundo-2);
+      border-bottom: 1px solid var(--cor-borda);
+    }
+    .beta-hero-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .beta-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(14,207,207,0.1);
+      border: 1px solid rgba(14,207,207,0.25);
+      padding: 0.4rem 1rem; border-radius: 100px;
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--cor-azul-satelite);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .beta-titulo {
+      font-family: var(--fonte-titulo);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 600; line-height: 1.15;
+    }
+    .beta-titulo em { font-style: normal; color: var(--cor-verde); }
+    .beta-desc { font-size: 0.95rem; color: var(--cor-texto-suave); margin-top: 0.8rem; font-weight: 300; max-width: 480px; line-height: 1.6; }
+    .beta-status {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; color: var(--cor-verde); font-weight: 500;
+    }
+    .beta-status-dot {
+      width: 8px; height: 8px; background: var(--cor-verde);
+      border-radius: 50%; animation: pulsar 2s ease-in-out infinite;
+    }
+
+    /* ── TABS ── */
+    .tabs-wrapper {
+      background: var(--cor-fundo-2);
+      border-bottom: 1px solid var(--cor-borda);
+      position: sticky; top: 65px; z-index: 50;
+    }
+    .tabs {
+      display: flex; gap: 0;
+      max-width: var(--max-width); margin: 0 auto; padding: 0 2rem;
+    }
+    .tab-btn {
+      padding: 1rem 1.8rem;
+      font-family: var(--fonte-titulo); font-size: 0.85rem; font-weight: 600;
+      color: var(--cor-texto-suave);
+      border-bottom: 2px solid transparent;
+      transition: var(--transicao); cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+    .tab-btn:hover { color: var(--cor-texto); }
+    .tab-btn.ativo { color: var(--cor-verde); border-bottom-color: var(--cor-verde); }
+
+    /* ── PAINEL CONTEÚDO ── */
+    .tab-painel { display: none; padding: 3rem 0; }
+    .tab-painel.ativo { display: block; }
+
+    /* ══════════════════════════════
+       DASHBOARD
+    ══════════════════════════════ */
+    .dash-topo {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .kpi {
+      background: var(--cor-fundo-card);
+      border: 1px solid var(--cor-borda);
+      border-radius: var(--raio);
+      padding: 1.2rem 1.5rem;
+      transition: var(--transicao);
+    }
+    .kpi:hover { border-color: rgba(45,235,122,0.3); }
+    .kpi-label { font-size: 0.72rem; color: var(--cor-texto-suave); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+    .kpi-val { font-family: var(--fonte-titulo); font-size: 1.8rem; font-weight: 700; color: var(--cor-verde); line-height: 1; }
+    .kpi-val.alerta { color: var(--cor-alerta); }
+    .kpi-val.perigo { color: #ff5f57; }
+    .kpi-sub { font-size: 0.75rem; color: var(--cor-texto-suave); margin-top: 0.3rem; }
+
+    .dash-meio {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 1.5rem; margin-bottom: 1.5rem;
+    }
+
+    /* Tabela de talhões */
+    .tabela-wrapper {
+      background: var(--cor-fundo-card);
+      border: 1px solid var(--cor-borda);
+      border-radius: var(--raio-lg);
+      overflow: hidden;
+    }
+    .tabela-header {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--cor-borda);
+      font-family: var(--fonte-titulo); font-size: 0.9rem; font-weight: 600;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .tabela-atualizado { font-size: 0.72rem; color: var(--cor-texto-suave); font-family: var(--fonte-corpo); font-weight: 300; }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      padding: 0.7rem 1.2rem;
+      text-align: left; font-size: 0.72rem;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--cor-texto-suave); font-weight: 600;
+      border-bottom: 1px solid var(--cor-borda);
+      background: var(--cor-fundo-2);
+    }
+    tbody tr { border-bottom: 1px solid rgba(45,235,122,0.06); transition: var(--transicao); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(45,235,122,0.03); }
+    tbody td { padding: 0.9rem 1.2rem; font-size: 0.85rem; }
+    .ndvi-bar-wrap { display: flex; align-items: center; gap: 0.6rem; }
+    .ndvi-mini { height: 4px; border-radius: 100px; background: var(--cor-verde-suave); flex: 1; overflow: hidden; }
+    .ndvi-mini-fill { height: 100%; border-radius: 100px; background: var(--cor-verde); }
+    .ndvi-mini-fill.medio { background: var(--cor-alerta); }
+    .ndvi-mini-fill.baixo  { background: #ff5f57; }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      padding: 0.2rem 0.6rem; border-radius: 100px;
+      font-size: 0.7rem; font-weight: 600;
+    }
+    .status-pill.ok     { background: rgba(45,235,122,0.1); color: var(--cor-verde); }
+    .status-pill.atencao{ background: rgba(245,200,66,0.1);  color: var(--cor-alerta); }
+    .status-pill.alerta { background: rgba(255,95,87,0.1);   color: #ff5f57; }
+
+    /* Gráfico de barras */
+    .grafico-box {
+      background: var(--cor-fundo-card);
+      border: 1px solid var(--cor-borda);
+      border-radius: var(--raio-lg);
+      padding: 1.5rem;
+    }
+    .grafico-titulo {
+      font-family: var(--fonte-titulo); font-size: 0.9rem; font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .grafico-legenda { font-size: 0.72rem; color: var(--cor-texto-suave); font-weight: 300; font-family: var(--fonte-corpo); }
+    .barras-container {
+      display: flex; align-items: flex-end; gap: 8px;
+      height: 160px; padding-bottom: 1.8rem;
+      border-bottom: 1px solid var(--cor-borda);
+      position: relative;
+    }
+    .barra-grupo { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .barra-col {
+      width: 100%; border-radius: 4px 4px 0 0;
+      position: relative; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .barra-col:hover { opacity: 0.8; }
+    .barra-col .tooltip {
+      position: absolute; bottom: 105%; left: 50%; transform: translateX(-50%);
+      background: var(--cor-fundo-2); border: 1px solid var(--cor-borda);
+      padding: 0.3rem 0.6rem; border-radius: 6px;
+      font-size: 0.7rem; white-space: nowrap;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+      color: var(--cor-texto);
+    }
+    .barra-col:hover .tooltip { opacity: 1; }
+    .barra-label { font-size: 0.65rem; color: var(--cor-texto-suave); margin-top: 0.4rem; text-align: center; }
+
+    /* Alertas */
+    .alertas-box {
+      background: var(--cor-fundo-card);
+      border: 1px solid var(--cor-borda);
+      border-radius: var(--raio-lg);
+      overflow: hidden;
+    }
+    .alertas-header {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--cor-borda);
+      font-family: var(--fonte-titulo); font-size: 0.9rem; font-weight: 600;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .alertas-count {
+      background: rgba(255,95,87,0.15); color: #ff5f57;
+      font-size: 0.7rem; font-weight: 700;
+      padding: 0.2rem 0.6rem; border-radius: 100px;
+    }
+    .alerta-item {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(45,235,122,0.06);
+      display: flex; gap: 1rem; align-items: flex-start;
+      transition: var(--transicao);
+    }
+    .alerta-item:last-child { border-bottom: none; }
+    .alerta-item:hover { background: rgba(45,235,122,0.02); }
+    .alerta-icone {
+      width: 34px; height: 34px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .alerta-icone.vermelho { background: rgba(255,95,87,0.1); }
+    .alerta-icone.amarelo  { background: rgba(245,200,66,0.1); }
+    .alerta-icone.verde    { background: rgba(45,235,122,0.1); }
+    .alerta-titulo { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.2rem; }
+    .alerta-desc   { font-size: 0.78rem; color: var(--cor-texto-suave); font-weight: 300; line-height: 1.4; }
+    .alerta-hora   { font-size: 0.7rem; color: var(--cor-texto-suave); margin-top: 0.2rem; }
+
+    /* ══════════════════════════════
+       SIMULADOR
+    ══════════════════════════════ */
+    .sim-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+    }
+    .sim-form-box {
+      background: var(--cor-fundo-card);
+      border: 1px solid var(--cor-borda);
+      border-radius: var(--raio-lg);
+      padding: 2rem;
+    }
+    .sim-titulo {
+      font-family: var(--fonte-titulo); font-size: 1rem; font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .sim-sub { font-size: 0.85rem; color: var(--cor-texto-suave); margin-bottom: 2rem; font-weight: 300; line-height: 1.5; }
+
+    .campo-grupo { margin-bottom: 1.4rem; }
+    .campo-label {
+      display: block; font-size: 0.8rem; font-weight: 600;
+      color: var(--cor-texto); margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+    .campo-label span { color: var(--cor-texto-suave); font-weight: 300; }
+    .campo-input, .campo-select {
+      width: 100%; padding: 0.75rem 1rem;
+      background: var(--cor-fundo-2);
+      border: 1px solid var(--cor-borda);
+      border-radius: var(--raio);
+      color: var(--cor-texto);
+      font-family: var(--fonte-corpo); font-size: 0.9rem;
+      transition: var(--transicao);
+      appearance: none;
+    }
+    .campo-input:focus, .campo-select:focus {
+      outline: none;
+      border-color: var(--cor-verde);
+      box-shadow: 0 0 0 3px rgba(45,235,122,0.1);
+    }
+    .campo-range-wrapper { display: flex; align-items: center; gap: 1rem; }
+    .campo-range {
+      flex: 1; -webkit-appearance: none; appearance: none;
+      height: 4px; background: var(--cor-verde-suave);
+      border-radius: 100px; outline: none;
+    }
+    .campo-range::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 16px; height: 16px;
+      background: var(--cor-verde); border-radius: 50%; cursor: pointer;
+    }
+    .range-val {
+      font-family: var(--fonte-titulo); font-size: 1rem;
+      font-weight: 700; color: var(--cor-verde); min-width: 40px; text-align: right;
+    }
+    .btn-analisar {
+      width: 100%; padding: 1rem;
+      background: var(--cor-verde); color: var(--cor-fundo);
+      border-radius: var(--raio);
+      font-family: var(--fonte-titulo); font-size: 1rem; font-weight: 700;
+      transition: var(--transicao);
+      box-shadow: 0 4px 20px rgba(45,235,122,0.3);
+      margin-top: 0.5rem;
+    }
+    .btn-analisar:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(45,235,122,0.45); }
+    .btn-analisar:active { transform: translateY(0); }
+
+    /* Resultado */
+    .sim-resultado {
+      background: var(--cor-fundo-card);
+      border: 1px solid var(--cor-borda);
+      border-radius: var(--raio-lg);
+      padding: 2rem;
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .resultado-vazio {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; height: 100%; min-height: 300px;
+      color: var(--cor-texto-suave);
+    }
+    .resultado-vazio-icone { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+    .resultado-vazio-txt { font-size: 0.9rem; font-weight: 300; }
+
+    .resultado-header {
+      display: flex; align-items: center; gap: 1rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--cor-borda);
+    }
+    .resultado-icone-grande {
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; flex-shrink: 0;
+    }
+    .resultado-icone-grande.verde  { background: rgba(45,235,122,0.15); }
+    .resultado-icone-grande.amarelo{ background: rgba(245,200,66,0.15); }
+    .resultado-icone-grande.vermelho{ background: rgba(255,95,87,0.15); }
+    .resultado-status-titulo {
+      font-family: var(--fonte-titulo); font-size: 1.2rem; font-weight: 700;
+    }
+    .resultado-status-titulo.verde  { color: var(--cor-verde); }
+    .resultado-status-titulo.amarelo{ color: var(--cor-alerta); }
+    .resultado-status-titulo.vermelho{ color: #ff5f57; }
+    .resultado-status-sub { font-size: 0.85rem; color: var(--cor-texto-suave); margin-top: 0.2rem; font-weight: 300; }
+
+    .resultado-metricas {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 0.8rem;
+    }
+    .metrica {
+      background: var(--cor-fundo-2); border: 1px solid var(--cor-borda);
+      border-radius: var(--raio); padding: 1rem; text-align: center;
+    }
+    .metrica-val { font-family: var(--fonte-titulo); font-size: 1.4rem; font-weight: 700; }
+    .metrica-label { font-size: 0.7rem; color: var(--cor-texto-suave); margin-top: 0.2rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    .resultado-recomendacoes { display: flex; flex-direction: column; gap: 0.7rem; }
+    .recomendacao-titulo { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cor-texto-suave); margin-bottom: 0.3rem; }
+    .recomendacao-item {
+      display: flex; align-items: flex-start; gap: 0.7rem;
+      padding: 0.8rem 1rem;
+      background: var(--cor-fundo-2); border: 1px solid var(--cor-borda);
+      border-radius: var(--raio); font-size: 0.85rem; line-height: 1.5;
+    }
+    .recomendacao-item .rec-icone { flex-shrink: 0; font-size: 1rem; margin-top: 0.1rem; }
+
+    .resultado-ndvi-visual {
+      background: var(--cor-fundo-2); border: 1px solid var(--cor-borda);
+      border-radius: var(--raio); padding: 1rem;
+    }
+    .ndvi-escala { display: flex; height: 8px; border-radius: 100px; overflow: hidden; margin-bottom: 0.6rem; }
+    .ndvi-escala div { flex: 1; }
+    .ndvi-marcador-wrapper { position: relative; height: 16px; }
+    .ndvi-marcador {
+      position: absolute; transform: translateX(-50%);
+      font-size: 0.7rem; color: var(--cor-verde); font-weight: 700;
+      white-space: nowrap;
+    }
+    .ndvi-marcador::before {
+      content: '▲'; display: block; text-align: center;
+      font-size: 0.6rem; margin-bottom: 2px;
+    }
+    .ndvi-labels {
+      display: flex; justify-content: space-between;
+      font-size: 0.65rem; color: var(--cor-texto-suave); margin-top: 0.3rem;
+    }
+
+    /* ── RESPONSIVO ── */
+    @media (max-width: 1000px) {
+      .dash-topo { grid-template-columns: repeat(2,1fr); }
+      .dash-meio { grid-template-columns: 1fr; }
+      .sim-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .dash-topo { grid-template-columns: repeat(2,1fr); }
+      .tabs { gap: 0; overflow-x: auto; }
+      .tab-btn { padding: 1rem 1.2rem; white-space: nowrap; font-size: 0.8rem; }
+      .resultado-metricas { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- NAVEGAÇÃO -->
+  <!-- ── NAVEGAÇÃO ── -->
   <nav class="navbar">
-    <a href="index.html" class="nav-logo">
-      <span></span> AgroSat
-    </a>
+    <a href="index.html" class="nav-logo"><span></span> AgroSat</a>
     <ul class="nav-links">
       <li><a href="index.html">Problema</a></li>
       <li><a href="tecnologia.html">Tecnologia</a></li>
       <li><a href="objetivos.html">Objetivos</a></li>
       <li><a href="beneficios.html">Benefícios</a></li>
       <li><a href="aplicacao.html">Aplicação</a></li>
-      <li><a href="beta.html">Beta</a></li>
+      <li><a href="beta.html" class="ativo">Beta</a></li>
     </ul>
     <button class="nav-hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
-
   <div class="nav-mobile">
     <a href="index.html">Problema</a>
     <a href="tecnologia.html">Tecnologia</a>
@@ -37,146 +402,302 @@
     <a href="beta.html">Beta</a>
   </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-grade"></div>
-    <div class="hero-orbita"></div>
-    <div class="hero-orbita"></div>
-    <div class="hero-orbita"></div>
-
+  <!-- ── BETA HERO ── -->
+  <div class="beta-hero">
     <div class="container">
-      <div class="hero-conteudo">
-        <div class="hero-tag">🛰️ Indústria Espacial · ODS 2 · ODS 13</div>
-        <h1 class="hero-titulo">
-          O campo precisa<br/>do que o <em>espaço</em><br/>já tem a oferecer
-        </h1>
-        <p class="hero-desc">
-          Enquanto satélites coletam dados precisos de toda a superfície terrestre,
-          milhões de agricultores ainda tomam decisões no escuro. O AgroSat conecta
-          a tecnologia orbital à realidade do campo.
-        </p>
-        <div class="hero-acoes">
-          <a href="tecnologia.html" class="btn-primario">Ver a solução →</a>
-          <a href="objetivos.html" class="btn-secundario">Nossos objetivos</a>
-        </div>
-        <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-num"><span data-valor="40">0</span>%</div>
-            <div class="stat-label">das perdas evitáveis</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num"><span data-valor="4">0</span>bi</div>
-            <div class="stat-label">sem internet confiável</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num"><span data-valor="6000">0</span>+</div>
-            <div class="stat-label">satélites ativos</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROBLEM -->
-  <section class="secao-destaque">
-    <div class="container">
-      <div class="secao-header revelar">
-        <div class="tag">⚠️ O Problema</div>
-        <h2 class="secao-titulo">Por que o campo ainda perde tanto?</h2>
-        <p class="secao-sub">
-          Três desafios críticos afetam a produtividade agrícola no Brasil e no mundo —
-          todos com solução tecnológica disponível, mas ainda inacessível para a maioria.
-        </p>
-      </div>
-
-      <div class="grid-3">
-        <div class="card revelar">
-          <div class="card-icone">💧</div>
-          <h3 class="card-titulo">Irrigação às cegas</h3>
-          <p class="card-desc">
-            Agricultores irrigam sem saber o real nível de umidade do solo.
-            Resultado: desperdício de até 50% da água usada na agricultura,
-            o maior consumidor hídrico do planeta.
+      <div class="beta-hero-inner">
+        <div>
+          <div class="beta-badge">🧪 Versão Beta — Acesso Antecipado</div>
+          <h1 class="beta-titulo">
+            Painel de Controle<br/><em>AgroSat</em>
+          </h1>
+          <p class="beta-desc">
+            Protótipo funcional do sistema. Monitore talhões em tempo real,
+            analise índices NDVI e receba recomendações inteligentes baseadas
+            em dados orbitais e sensores IoT.
           </p>
         </div>
-        <div class="card revelar">
-          <div class="card-icone">🐛</div>
-          <h3 class="card-titulo">Pragas detectadas tarde</h3>
-          <p class="card-desc">
-            Sem monitoramento contínuo, pragas e doenças são percebidas
-            somente quando o dano já é visível. A detecção precoce
-            por satélite pode antecipar o alerta em até 2 semanas.
-          </p>
-        </div>
-        <div class="card revelar">
-          <div class="card-icone">📡</div>
-          <h3 class="card-titulo">Sem acesso à tecnologia</h3>
-          <p class="card-desc">
-            Pequenos agricultores em regiões remotas não têm acesso
-            à internet ou a plataformas de dados. A conectividade via
-            satélite muda essa realidade sem depender de infraestrutura local.
-          </p>
+        <div class="beta-status">
+          <div class="beta-status-dot"></div>
+          Sistema ativo · Dados simulados · Última atualização: agora
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- DADOS -->
-  <section>
+  <!-- ── TABS ── -->
+  <div class="tabs-wrapper">
+    <div class="tabs">
+      <button class="tab-btn ativo" onclick="trocarTab('dashboard', this)">
+        📊 Dashboard
+      </button>
+      <button class="tab-btn" onclick="trocarTab('simulador', this)">
+        🧪 Simulador de Análise
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       TAB: DASHBOARD
+  ══════════════════════════════ -->
+  <div id="tab-dashboard" class="tab-painel ativo">
     <div class="container">
-      <div class="secao-header revelar">
-        <div class="tag">📊 Dados do Impacto</div>
-        <h2 class="secao-titulo">Números que provam a urgência</h2>
+
+      <!-- KPIs -->
+      <div class="dash-topo">
+        <div class="kpi">
+          <div class="kpi-label">NDVI Médio Geral</div>
+          <div class="kpi-val">0.62</div>
+          <div class="kpi-sub">↑ 0.04 vs semana anterior</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Talhões Monitorados</div>
+          <div class="kpi-val">6</div>
+          <div class="kpi-sub">122 hectares no total</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Alertas Ativos</div>
+          <div class="kpi-val alerta">2</div>
+          <div class="kpi-sub">1 crítico · 1 atenção</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Umidade Média</div>
+          <div class="kpi-val">54%</div>
+          <div class="kpi-sub">Dentro do ideal para soja</div>
+        </div>
       </div>
 
-      <div class="grid-3">
-        <div class="card card-destaque revelar">
-          <div class="card-numero"><span data-valor="850">0</span>bi</div>
-          <div class="card-numero-label">pessoas passam fome no mundo hoje</div>
+      <!-- Tabela + Gráfico -->
+      <div class="dash-meio">
+
+        <!-- Tabela de talhões -->
+        <div class="tabela-wrapper">
+          <div class="tabela-header">
+            Talhões
+            <span class="tabela-atualizado">Atualizado há 5 min</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Talhão</th>
+                <th>Cultura</th>
+                <th>NDVI</th>
+                <th>Umidade</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>A1</strong></td>
+                <td>Soja</td>
+                <td>
+                  <div class="ndvi-bar-wrap">
+                    0.74
+                    <div class="ndvi-mini"><div class="ndvi-mini-fill" style="width:74%"></div></div>
+                  </div>
+                </td>
+                <td>68%</td>
+                <td><span class="status-pill ok">● Ótimo</span></td>
+              </tr>
+              <tr>
+                <td><strong>A2</strong></td>
+                <td>Milho</td>
+                <td>
+                  <div class="ndvi-bar-wrap">
+                    0.61
+                    <div class="ndvi-mini"><div class="ndvi-mini-fill" style="width:61%"></div></div>
+                  </div>
+                </td>
+                <td>55%</td>
+                <td><span class="status-pill ok">● Ótimo</span></td>
+              </tr>
+              <tr>
+                <td><strong>B1</strong></td>
+                <td>Soja</td>
+                <td>
+                  <div class="ndvi-bar-wrap">
+                    0.52
+                    <div class="ndvi-mini"><div class="ndvi-mini-fill medio" style="width:52%"></div></div>
+                  </div>
+                </td>
+                <td>42%</td>
+                <td><span class="status-pill atencao">● Atenção</span></td>
+              </tr>
+              <tr>
+                <td><strong>B2</strong></td>
+                <td>Cana</td>
+                <td>
+                  <div class="ndvi-bar-wrap">
+                    0.80
+                    <div class="ndvi-mini"><div class="ndvi-mini-fill" style="width:80%"></div></div>
+                  </div>
+                </td>
+                <td>72%</td>
+                <td><span class="status-pill ok">● Ótimo</span></td>
+              </tr>
+              <tr>
+                <td><strong>B3</strong></td>
+                <td>Soja</td>
+                <td>
+                  <div class="ndvi-bar-wrap">
+                    0.38
+                    <div class="ndvi-mini"><div class="ndvi-mini-fill baixo" style="width:38%"></div></div>
+                  </div>
+                </td>
+                <td>28%</td>
+                <td><span class="status-pill alerta">● Crítico</span></td>
+              </tr>
+              <tr>
+                <td><strong>C1</strong></td>
+                <td>Milho</td>
+                <td>
+                  <div class="ndvi-bar-wrap">
+                    0.67
+                    <div class="ndvi-mini"><div class="ndvi-mini-fill" style="width:67%"></div></div>
+                  </div>
+                </td>
+                <td>60%</td>
+                <td><span class="status-pill ok">● Ótimo</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="card card-destaque revelar">
-          <div class="card-numero"><span data-valor="70">0</span>%</div>
-          <div class="card-numero-label">da água doce consumida na agricultura</div>
-        </div>
-        <div class="card card-destaque revelar">
-          <div class="card-numero">R$<span data-valor="30">0</span>bi</div>
-          <div class="card-numero-label">perdidos por pragas no Brasil por ano</div>
+
+        <!-- Gráfico NDVI histórico -->
+        <div class="grafico-box">
+          <div class="grafico-titulo">
+            Histórico NDVI — Talhão B3
+            <span class="grafico-legenda">Últimas 10 semanas</span>
+          </div>
+          <div class="barras-container" id="grafico-barras">
+            <!-- gerado pelo JS -->
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:0.5rem;">
+            <span style="font-size:0.65rem; color:var(--cor-texto-suave)">Sem. 1</span>
+            <span style="font-size:0.65rem; color:var(--cor-texto-suave)">Sem. 10</span>
+          </div>
         </div>
       </div>
+
+      <!-- Alertas -->
+      <div class="alertas-box">
+        <div class="alertas-header">
+          Alertas e Notificações
+          <span class="alertas-count">2 ativos</span>
+        </div>
+        <div class="alerta-item">
+          <div class="alerta-icone vermelho">🚨</div>
+          <div>
+            <div class="alerta-titulo">NDVI Crítico — Talhão B3</div>
+            <div class="alerta-desc">Índice NDVI em 0.38, abaixo do limiar mínimo de 0.45 para soja. Umidade do solo em 28%. Risco alto de perda de produtividade. Irrigação imediata recomendada.</div>
+            <div class="alerta-hora">🕐 Há 2 horas · Satélite Sentinel-2</div>
+          </div>
+        </div>
+        <div class="alerta-item">
+          <div class="alerta-icone amarelo">⚠️</div>
+          <div>
+            <div class="alerta-titulo">Umidade em queda — Talhão B1</div>
+            <div class="alerta-desc">Umidade do solo caiu para 42% nas últimas 48h. NDVI em 0.52, dentro do aceitável mas em tendência de queda. Monitoramento intensivo recomendado.</div>
+            <div class="alerta-hora">🕐 Há 6 horas · Sensor IoT ESP32</div>
+          </div>
+        </div>
+        <div class="alerta-item">
+          <div class="alerta-icone verde">✅</div>
+          <div>
+            <div class="alerta-titulo">Talhão B2 com melhor desempenho</div>
+            <div class="alerta-desc">NDVI em 0.80 — maior índice da fazenda esta semana. Cana-de-açúcar com desenvolvimento excelente. Nenhuma ação necessária.</div>
+            <div class="alerta-hora">🕐 Há 12 horas · Atualização automática</div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
 
-  <!-- ── ODS ── -->
-  <section class="secao-destaque">
+  <!-- ══════════════════════════════
+       TAB: SIMULADOR
+  ══════════════════════════════ -->
+  <div id="tab-simulador" class="tab-painel">
     <div class="container">
-      <div class="secao-header revelar">
-        <div class="tag">🌱 Objetivos de Desenvolvimento Sustentável</div>
-        <h2 class="secao-titulo">Conectado aos ODS da ONU</h2>
-        <p class="secao-sub">
-          O AgroSat contribui diretamente para metas globais de desenvolvimento
-          sustentável estabelecidas pela Organização das Nações Unidas.
-        </p>
-      </div>
+      <div class="sim-layout">
 
-      <div class="ods-grid revelar">
-        <div class="ods-badge"><span class="ods-num">ODS 2</span> Fome zero e agricultura sustentável</div>
-        <div class="ods-badge"><span class="ods-num">ODS 9</span> Inovação e infraestrutura</div>
-        <div class="ods-badge"><span class="ods-num">ODS 10</span> Redução das desigualdades</div>
-        <div class="ods-badge"><span class="ods-num">ODS 13</span> Ação climática</div>
+        <!-- Formulário -->
+        <div class="sim-form-box">
+          <h2 class="sim-titulo">🌿 Simulador de Análise</h2>
+          <p class="sim-sub">
+            Insira os dados do seu talhão e receba uma análise completa com
+            diagnóstico, métricas calculadas e recomendações de manejo.
+          </p>
+
+          <div class="campo-grupo">
+            <label class="campo-label" for="cultura">Cultura plantada</label>
+            <select class="campo-select" id="cultura">
+              <option value="soja">🌱 Soja</option>
+              <option value="milho">🌽 Milho</option>
+              <option value="cana">🎋 Cana-de-açúcar</option>
+              <option value="cafe">☕ Café</option>
+              <option value="algodao">🤍 Algodão</option>
+            </select>
+          </div>
+
+          <div class="campo-grupo">
+            <label class="campo-label" for="ndvi">
+              Índice NDVI <span>(obtido via satélite)</span>
+            </label>
+            <div class="campo-range-wrapper">
+              <input type="range" class="campo-range" id="ndvi" min="0" max="1" step="0.01" value="0.55"
+                oninput="document.getElementById('ndvi-val').textContent = parseFloat(this.value).toFixed(2)" />
+              <span class="range-val" id="ndvi-val">0.55</span>
+            </div>
+          </div>
+
+          <div class="campo-grupo">
+            <label class="campo-label" for="umidade">
+              Umidade do solo (%) <span>(sensor IoT)</span>
+            </label>
+            <div class="campo-range-wrapper">
+              <input type="range" class="campo-range" id="umidade" min="0" max="100" step="1" value="50"
+                oninput="document.getElementById('umi-val').textContent = this.value + '%'" />
+              <span class="range-val" id="umi-val">50%</span>
+            </div>
+          </div>
+
+          <div class="campo-grupo">
+            <label class="campo-label" for="area">Área do talhão (ha)</label>
+            <input type="number" class="campo-input" id="area" min="1" max="500" value="25" placeholder="ex: 25" />
+          </div>
+
+          <div class="campo-grupo">
+            <label class="campo-label" for="dias">Dias sem chuva</label>
+            <input type="number" class="campo-input" id="dias" min="0" max="60" value="7" placeholder="ex: 7" />
+          </div>
+
+          <button class="btn-analisar" onclick="analisar()">
+            🛰️ Analisar com dados satelitais
+          </button>
+        </div>
+
+        <!-- Resultado -->
+        <div class="sim-resultado" id="resultado">
+          <div class="resultado-vazio">
+            <div class="resultado-vazio-icone">🛰️</div>
+            <div class="resultado-vazio-txt">
+              Preencha os dados ao lado e clique em<br/>
+              <strong style="color:var(--cor-verde)">Analisar</strong> para ver o diagnóstico completo
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ── RODAPÉ ── -->
   <footer>
     <div class="container">
       <div class="footer-grid">
         <div>
           <div class="footer-logo">AgroSat</div>
-          <p class="footer-desc">
-            Plataforma de agricultura de precisão via satélite. Dados orbitais
-            a serviço do campo e da sustentabilidade.
-          </p>
+          <p class="footer-desc">Plataforma de agricultura de precisão via satélite.</p>
         </div>
         <div>
           <div class="footer-col-titulo">Páginas</div>
@@ -186,6 +707,7 @@
             <a href="objetivos.html">Objetivos</a>
             <a href="beneficios.html">Benefícios</a>
             <a href="aplicacao.html">Aplicação</a>
+            <a href="beta.html">Beta</a>
           </nav>
         </div>
         <div>
@@ -210,5 +732,163 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+  // ══════════════════════════════
+  // TABS
+  // ══════════════════════════════
+  function trocarTab(id, btn) {
+    document.querySelectorAll('.tab-painel').forEach(p => p.classList.remove('ativo'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('ativo'));
+    document.getElementById('tab-' + id).classList.add('ativo');
+    btn.classList.add('ativo');
+  }
+
+  // ══════════════════════════════
+  // GRÁFICO DE BARRAS — histórico NDVI B3
+  // ══════════════════════════════
+  const historicoNDVI = [0.72, 0.68, 0.65, 0.60, 0.55, 0.50, 0.46, 0.42, 0.39, 0.38];
+  const container = document.getElementById('grafico-barras');
+  if (container) {
+    historicoNDVI.forEach((val, i) => {
+      const grupo = document.createElement('div');
+      grupo.className = 'barra-grupo';
+      const cor = val >= 0.60 ? 'rgba(45,235,122,0.6)' : val >= 0.45 ? 'rgba(245,200,66,0.6)' : 'rgba(255,95,87,0.6)';
+      grupo.innerHTML = `
+        <div class="barra-col" style="height:${val*100}%; background:${cor}; margin-top:auto;">
+          <div class="tooltip">Sem ${i+1}: ${val}</div>
+        </div>
+        <div class="barra-label">S${i+1}</div>
+      `;
+      container.appendChild(grupo);
+    });
+  }
+
+  // ══════════════════════════════
+  // SIMULADOR
+  // ══════════════════════════════
+  const limiaresNDVI = {
+    soja:    { critico: 0.45, atencao: 0.60, ideal: 0.70 },
+    milho:   { critico: 0.40, atencao: 0.55, ideal: 0.65 },
+    cana:    { critico: 0.50, atencao: 0.65, ideal: 0.75 },
+    cafe:    { critico: 0.35, atencao: 0.50, ideal: 0.60 },
+    algodao: { critico: 0.38, atencao: 0.52, ideal: 0.65 },
+  };
+
+  const nomesCultura = {
+    soja: 'Soja', milho: 'Milho', cana: 'Cana-de-açúcar', cafe: 'Café', algodao: 'Algodão'
+  };
+
+  function analisar() {
+    const cultura  = document.getElementById('cultura').value;
+    const ndvi     = parseFloat(document.getElementById('ndvi').value);
+    const umidade  = parseInt(document.getElementById('umidade').value);
+    const area     = parseInt(document.getElementById('area').value) || 25;
+    const dias     = parseInt(document.getElementById('dias').value) || 0;
+    const limiares = limiaresNDVI[cultura];
+
+    // Determinar status
+    let status, classe, icone, titulo, subtitulo;
+    if (ndvi >= limiares.ideal && umidade >= 55) {
+      status = 'verde'; icone = '🌿';
+      titulo = 'Lavoura Saudável'; subtitulo = 'Condições ideais para a cultura. Nenhuma ação urgente necessária.';
+    } else if (ndvi < limiares.critico || umidade < 30) {
+      status = 'vermelho'; icone = '🚨';
+      titulo = 'Situação Crítica'; subtitulo = 'Intervenção imediata necessária. Risco alto de perda de produtividade.';
+    } else {
+      status = 'amarelo'; icone = '⚠️';
+      titulo = 'Atenção Necessária'; subtitulo = 'Condições abaixo do ideal. Monitoramento intensivo recomendado.';
+    }
+
+    // Calcular métricas
+    const aguaNecessaria = umidade < 50 ? Math.round((50 - umidade) * area * 2.5) : 0;
+    const produtividadeEst = Math.round(ndvi * 4200);
+    const riscoPerda = ndvi < limiares.critico ? 'Alto' : ndvi < limiares.atencao ? 'Médio' : 'Baixo';
+    const corRisco = riscoPerda === 'Alto' ? '#ff5f57' : riscoPerda === 'Médio' ? 'var(--cor-alerta)' : 'var(--cor-verde)';
+
+    // Recomendações
+    const recs = [];
+    if (umidade < 30) recs.push({ icone: '💧', txt: `Irrigação urgente: aplicar aproximadamente ${aguaNecessaria.toLocaleString()}L nos próximos 2 dias para atingir umidade ideal.` });
+    else if (umidade < 50) recs.push({ icone: '💧', txt: `Irrigação preventiva recomendada com ${aguaNecessaria.toLocaleString()}L. Monitore a umidade diariamente.` });
+    if (ndvi < limiares.critico) recs.push({ icone: '🔬', txt: 'NDVI crítico pode indicar praga ou doença. Solicite vistoria técnica presencial imediatamente.' });
+    else if (ndvi < limiares.atencao) recs.push({ icone: '🔍', txt: 'NDVI abaixo do ideal. Verifique a presença de pragas ou deficiência nutricional no solo.' });
+    if (dias > 10) recs.push({ icone: '🌧️', txt: `${dias} dias sem chuva é acima do tolerado. Considere irrigação suplementar independente da umidade atual.` });
+    if (recs.length === 0) recs.push({ icone: '✅', txt: 'Lavoura em condições ótimas. Mantenha o monitoramento semanal via satélite.' });
+    recs.push({ icone: '🛰️', txt: `Próxima captura satelital Sentinel-2 em ${Math.floor(Math.random()*4)+1} dias. Dados serão atualizados automaticamente.` });
+
+    // Posição na escala NDVI (0 a 1)
+    const posNDVI = Math.round(ndvi * 100);
+
+    // Renderizar
+    const resultado = document.getElementById('resultado');
+    resultado.innerHTML = `
+      <div class="resultado-header">
+        <div class="resultado-icone-grande ${status}">${icone}</div>
+        <div>
+          <div class="resultado-status-titulo ${status}">${titulo}</div>
+          <div class="resultado-status-sub">${nomesCultura[cultura]} · ${area}ha · ${dias} dias sem chuva</div>
+          <div class="resultado-status-sub">${subtitulo}</div>
+        </div>
+      </div>
+
+      <div class="resultado-metricas">
+        <div class="metrica">
+          <div class="metrica-val" style="color:${ndvi >= limiares.ideal ? 'var(--cor-verde)' : ndvi < limiares.critico ? '#ff5f57' : 'var(--cor-alerta)'}">${ndvi.toFixed(2)}</div>
+          <div class="metrica-label">NDVI</div>
+        </div>
+        <div class="metrica">
+          <div class="metrica-val" style="color:${umidade >= 50 ? 'var(--cor-verde)' : umidade < 30 ? '#ff5f57' : 'var(--cor-alerta)'}">${umidade}%</div>
+          <div class="metrica-label">Umidade</div>
+        </div>
+        <div class="metrica">
+          <div class="metrica-val" style="color:${corRisco}">${riscoPerda}</div>
+          <div class="metrica-label">Risco</div>
+        </div>
+        <div class="metrica">
+          <div class="metrica-val">${produtividadeEst}</div>
+          <div class="metrica-label">Est. kg/ha</div>
+        </div>
+        <div class="metrica">
+          <div class="metrica-val">${area}ha</div>
+          <div class="metrica-label">Área</div>
+        </div>
+        <div class="metrica">
+          <div class="metrica-val" style="color:${aguaNecessaria > 0 ? 'var(--cor-alerta)' : 'var(--cor-verde)'}">
+            ${aguaNecessaria > 0 ? aguaNecessaria.toLocaleString()+'L' : 'OK'}
+          </div>
+          <div class="metrica-label">Água Nec.</div>
+        </div>
+      </div>
+
+      <div class="resultado-ndvi-visual">
+        <div style="font-size:0.75rem; color:var(--cor-texto-suave); margin-bottom:0.5rem; font-weight:500;">Posição na Escala NDVI</div>
+        <div class="ndvi-escala">
+          <div style="background:#ff5f57; opacity:0.7"></div>
+          <div style="background:#ff8c42; opacity:0.7"></div>
+          <div style="background:var(--cor-alerta); opacity:0.7"></div>
+          <div style="background:#8bc34a; opacity:0.7"></div>
+          <div style="background:var(--cor-verde); opacity:0.7"></div>
+        </div>
+        <div class="ndvi-marcador-wrapper">
+          <div class="ndvi-marcador" style="left:${posNDVI}%">${ndvi.toFixed(2)}</div>
+        </div>
+        <div class="ndvi-labels">
+          <span>0.0 — Solo exposto</span>
+          <span>0.5 — Vegetação média</span>
+          <span>1.0 — Vegetação densa</span>
+        </div>
+      </div>
+
+      <div class="resultado-recomendacoes">
+        <div class="recomendacao-titulo">📋 Recomendações</div>
+        ${recs.map(r => `
+          <div class="recomendacao-item">
+            <span class="rec-icone">${r.icone}</span>
+            <span>${r.txt}</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+  </script>
 </body>
 </html>
