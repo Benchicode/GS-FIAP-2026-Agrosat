@@ -9,29 +9,11 @@
 </head>
 <body>
 
-  <nav class="navbar">
-    <a href="../index.html" class="nav-logo"><span></span> AgroSat</a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Problema</a></li>
-      <li><a href="tecnologia.html">Tecnologia</a></li>
-      <li><a href="objetivos.html">Objetivos</a></li>
-      <li><a href="beneficios.html">Benefícios</a></li>
-      <li><a href="aplicacao.html">Aplicação</a></li>
-      <li><a href="beta.html">Beta</a></li>
-    </ul>
-    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </nav>
-  <div class="nav-mobile">
-    <a href="../index.html">Problema</a>
-    <a href="tecnologia.html">Tecnologia</a>
-    <a href="objetivos.html">Objetivos</a>
-    <a href="beneficios.html">Benefícios</a>
-    <a href="aplicacao.html">Aplicação</a>
-    <a href="beta.html">Beta</a>
-  </div>
+  <!-- NAVEGAÇÃO (React Router DOM) -->
+  <div id="react-navbar"></div>
 
   <!-- HERO -->
-  <section class="hero" style="min-height: 55vh;">
+  <section class="hero hero-subpage">
     <div class="hero-grade"></div>
     <div class="container">
       <div class="hero-conteudo">
@@ -54,32 +36,7 @@
         <div class="tag">📊 Números de Impacto</div>
         <h2 class="secao-titulo">Resultados que se medem</h2>
       </div>
-      <div class="grid-3">
-        <div class="card card-destaque revelar">
-          <div class="card-numero"><span data-valor="30">0</span>%</div>
-          <div class="card-numero-label">menos água usada na irrigação com decisão orientada por dados</div>
-        </div>
-        <div class="card card-destaque revelar">
-          <div class="card-numero"><span data-valor="20">0</span>%</div>
-          <div class="card-numero-label">de aumento médio na produtividade da lavoura monitorada</div>
-        </div>
-        <div class="card card-destaque revelar">
-          <div class="card-numero"><span data-valor="14">0</span> dias</div>
-          <div class="card-numero-label">de antecipação na detecção de pragas e doenças</div>
-        </div>
-        <div class="card card-destaque revelar">
-          <div class="card-numero"><span data-valor="25">0</span>%</div>
-          <div class="card-numero-label">redução no uso de agrotóxicos com aplicação localizada</div>
-        </div>
-        <div class="card card-destaque revelar">
-          <div class="card-numero"><span data-valor="10">0</span>k+</div>
-          <div class="card-numero-label">pequenos produtores em regiões remotas alcançados</div>
-        </div>
-        <div class="card card-destaque revelar">
-          <div class="card-numero">4+</div>
-          <div class="card-numero-label">APIs orbitais abertas integradas sem custo para o usuário</div>
-        </div>
-      </div>
+      <div id="react-cards-impacto-beneficios"></div>
     </div>
   </section>
 
@@ -94,44 +51,7 @@
         </p>
       </div>
 
-      <div class="grid-3">
-        <div class="perfil revelar">
-          <div class="perfil-avatar">👨‍🌾</div>
-          <div>
-            <div class="perfil-nome">João Ferreira</div>
-            <div class="perfil-cargo">Pequeno Produtor Rural</div>
-            <p class="perfil-desc">
-              Cultiva 50 hectares de soja no interior do Mato Grosso. Sem internet confiável,
-              usava estimativas visuais para decidir quando irrigar. Com o AgroSat, recebe
-              alertas direto no celular via satélite.
-            </p>
-          </div>
-        </div>
-        <div class="perfil revelar">
-          <div class="perfil-avatar">👩‍💼</div>
-          <div>
-            <div class="perfil-nome">Marina Costa</div>
-            <div class="perfil-cargo">Gestora de Cooperativa</div>
-            <p class="perfil-desc">
-              Coordena 200 produtores associados no Paraná. Usa o dashboard do AgroSat
-              para monitorar todas as propriedades em um único painel, identificar
-              tendências e orientar decisões coletivas de manejo.
-            </p>
-          </div>
-        </div>
-        <div class="perfil revelar">
-          <div class="perfil-avatar">🔬</div>
-          <div>
-            <div class="perfil-nome">Dr. Paulo Mendes</div>
-            <div class="perfil-cargo">Pesquisador Ambiental — INPE</div>
-            <p class="perfil-desc">
-              Utiliza os dados históricos do AgroSat para correlacionar padrões
-              de vegetação com mudanças climáticas, contribuindo para políticas
-              públicas de uso sustentável do solo no Brasil.
-            </p>
-          </div>
-        </div>
-      </div>
+      <div id="react-perfis"></div>
     </div>
   </section>
 
@@ -142,35 +62,7 @@
         <div class="tag">🌍 Dimensões do Impacto</div>
         <h2 class="secao-titulo">Benefícios em três dimensões</h2>
       </div>
-      <div class="grid-3">
-        <div class="card revelar">
-          <div class="card-icone">💰</div>
-          <h3 class="card-titulo">Econômico</h3>
-          <p class="card-desc">
-            Redução de custos com insumos, água e mão-de-obra. Aumento de produtividade
-            sem ampliar área plantada. Menor perda por pragas e clima adverso.
-            ROI positivo já no primeiro ciclo de uso.
-          </p>
-        </div>
-        <div class="card revelar">
-          <div class="card-icone">🌱</div>
-          <h3 class="card-titulo">Ambiental</h3>
-          <p class="card-desc">
-            Menos água desperdiçada em bacias hidrográficas já pressionadas.
-            Menos agrotóxico lixiviando para rios e lençóis freáticos.
-            Solo tratado com precisão tem maior longevidade produtiva.
-          </p>
-        </div>
-        <div class="card revelar">
-          <div class="card-icone">🤝</div>
-          <h3 class="card-titulo">Social</h3>
-          <p class="card-desc">
-            Democratiza tecnologia que antes só grandes fazendas acessavam.
-            Conecta regiões excluídas da revolução digital. Fortalece a
-            agricultura familiar e aumenta a segurança alimentar local.
-          </p>
-        </div>
-      </div>
+      <div id="react-dimensoes"></div>
     </div>
   </section>
 
@@ -243,5 +135,13 @@
   </footer>
 
   <script src="../js/main.js"></script>
+
+  <!-- React + ReactDOM + React Router DOM via CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-router-dom@6/dist/umd/react-router-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="../js/dados.js"></script>
+  <script type="text/babel" src="../js/react-components.jsx"></script>
 </body>
 </html>

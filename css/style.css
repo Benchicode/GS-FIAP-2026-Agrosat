@@ -998,3 +998,41 @@ footer {
   .mockup-cards { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
+
+/* =============================================
+   CLASSES UTILITÁRIAS — Web Development
+   (substituem style="" inline)
+   ============================================= */
+
+.hero-subpage          { min-height: 55vh; }
+
+.historia-wrap         { max-width: 720px; }
+.historia-card         { margin-bottom: 1rem; }
+.historia-card:last-child { margin-bottom: 0; }
+.historia-inner        { display: flex; gap: 1rem; align-items: flex-start; }
+.historia-icone        { font-size: 2rem; flex-shrink: 0; }
+.historia-alerta       { color: var(--cor-alerta); font-style: italic; }
+
+.cta-wrap              { max-width: 600px; margin: 0 auto; }
+.cta-centro            { text-align: center; }
+.cta-tag               { justify-content: center; margin-bottom: 2rem; }
+.cta-titulo            { margin-bottom: 1rem; }
+.cta-titulo em         { color: var(--cor-verde); font-style: normal; }
+.cta-sub               { margin: 0 auto 2.5rem; text-align: center; }
+.cta-acoes             { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.progresso-wrap        { max-width: 640px; }
+
+/* mockup — substitui style inline */
+.mockup-card-alerta { border-color: rgba(245,200,66,0.4); }
+.mockup-val-alerta  { color: var(--cor-alerta); }
+.mockup-b-45  { height: 45%; }
+.mockup-b-60  { height: 60%; }
+.mockup-b-55  { height: 55%; }
+.mockup-b-80  { height: 80%; }
+.mockup-b-70  { height: 70%; }
+.mockup-b-65  { height: 65%; }
+.mockup-b-75  { height: 75%; }
+.mockup-b-90  { height: 90%; }
+.mockup-b-50  { height: 50%; }
+.mockup-b-40  { height: 40%; }

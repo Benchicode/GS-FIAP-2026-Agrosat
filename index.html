@@ -9,32 +9,8 @@
 </head>
 <body>
 
-  <!-- NAVEGAÇÃO -->
-  <nav class="navbar">
-    <a href="index.html" class="nav-logo">
-      <span></span> AgroSat
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html">Problema</a></li>
-      <li><a href="/pages/tecnologia.html">Tecnologia</a></li>
-      <li><a href="/pages/objetivos.html">Objetivos</a></li>
-      <li><a href="/pages/beneficios.html">Benefícios</a></li>
-      <li><a href="/pages/aplicacao.html">Aplicação</a></li>
-      <li><a href="/pages/beta.html">Beta</a></li>
-    </ul>
-    <button class="nav-hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <div class="nav-mobile">
-    <a href="index.html">Problema</a>
-    <a href="/pages/tecnologia.html">Tecnologia</a>
-    <a href="/pages/objetivos.html">Objetivos</a>
-    <a href="/pages/beneficios.html">Benefícios</a>
-    <a href="/pages/aplicacao.html">Aplicação</a>
-    <a href="/pages/beta.html">Beta</a>
-  </div>
+  <!-- NAVEGAÇÃO (React Router DOM) -->
+  <div id="react-navbar"></div>
 
   <!-- HERO -->
   <section class="hero">
@@ -88,35 +64,8 @@
         </p>
       </div>
 
-      <div class="grid-3">
-        <div class="card revelar">
-          <div class="card-icone">💧</div>
-          <h3 class="card-titulo">Irrigação às cegas</h3>
-          <p class="card-desc">
-            Agricultores irrigam sem saber o real nível de umidade do solo.
-            Resultado: desperdício de até 50% da água usada na agricultura,
-            o maior consumidor hídrico do planeta.
-          </p>
-        </div>
-        <div class="card revelar">
-          <div class="card-icone">🐛</div>
-          <h3 class="card-titulo">Pragas detectadas tarde</h3>
-          <p class="card-desc">
-            Sem monitoramento contínuo, pragas e doenças são percebidas
-            somente quando o dano já é visível. A detecção precoce
-            por satélite pode antecipar o alerta em até 2 semanas.
-          </p>
-        </div>
-        <div class="card revelar">
-          <div class="card-icone">📡</div>
-          <h3 class="card-titulo">Sem acesso à tecnologia</h3>
-          <p class="card-desc">
-            Pequenos agricultores em regiões remotas não têm acesso
-            à internet ou a plataformas de dados. A conectividade via
-            satélite muda essa realidade sem depender de infraestrutura local.
-          </p>
-        </div>
-      </div>
+      <!-- cards renderizados pelo React a partir de js/dados.js -->
+      <div id="react-cards-problema"></div>
     </div>
   </section>
 
@@ -128,20 +77,8 @@
         <h2 class="secao-titulo">Números que provam a urgência</h2>
       </div>
 
-      <div class="grid-3">
-        <div class="card card-destaque revelar">
-          <div class="card-numero"><span data-valor="850">0</span>bi</div>
-          <div class="card-numero-label">pessoas passam fome no mundo hoje</div>
-        </div>
-        <div class="card card-destaque revelar">
-          <div class="card-numero"><span data-valor="70">0</span>%</div>
-          <div class="card-numero-label">da água doce consumida na agricultura</div>
-        </div>
-        <div class="card card-destaque revelar">
-          <div class="card-numero">R$<span data-valor="30">0</span>bi</div>
-          <div class="card-numero-label">perdidos por pragas no Brasil por ano</div>
-        </div>
-      </div>
+      <!-- cards renderizados pelo React a partir de js/dados.js -->
+      <div id="react-cards-impacto"></div>
     </div>
   </section>
 
@@ -221,5 +158,13 @@
   </footer>
 
   <script src="js/main.js"></script>
+
+  <!-- React + ReactDOM + React Router DOM via CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-router-dom@6/dist/umd/react-router-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="js/dados.js"></script>
+  <script type="text/babel" src="js/react-components.jsx"></script>
 </body>
 </html>
