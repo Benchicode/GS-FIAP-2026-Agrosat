@@ -55,4 +55,4 @@ src/
 
 ## 🌐 Deploy
 
-🔗 [Ver site ao vivo](#) — substituir pelo link do Vercel/GitHub Pages
+🔗 [Ver site ao vivo](#) — https://gsagrosat.vercel.app
