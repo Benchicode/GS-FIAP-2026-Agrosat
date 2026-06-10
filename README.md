@@ -1,4 +1,4 @@
-## AgroSat — Web Development (React + Vite)
+## AgroSat 
 
 **Global Solution 2026 · FIAP · Engenharia de Software · 1º Ano**
 
