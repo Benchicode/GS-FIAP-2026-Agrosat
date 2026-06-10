@@ -53,6 +53,4 @@ src/
 - **React Router DOM** — 6 rotas: `/`, `/tecnologia`, `/objetivos`, `/beneficios`, `/aplicacao`, `/beta`
 - **JSON local** — `src/data/dados.json` com todos os dados fictícios
 
-## 🌐 Deploy
-
-🔗 [Ver site ao vivo](#) — https://gsagrosat.vercel.app
+ https://gsagrosat.vercel.app
