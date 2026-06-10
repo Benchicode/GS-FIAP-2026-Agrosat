@@ -576,9 +576,7 @@ section {
 .timeline-item {
   position: relative;
   padding: 0 0 3rem 2.5rem;
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  animation: fadeUp 0.5s ease both;
 }
 
 .timeline-item.visivel {
@@ -946,9 +944,7 @@ footer {
 }
 
 .revelar {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  animation: fadeUp 0.6s ease both;
 }
 
 .revelar.visivel {
@@ -1036,3 +1032,16 @@ footer {
 .mockup-b-90  { height: 90%; }
 .mockup-b-50  { height: 50%; }
 .mockup-b-40  { height: 40%; }
+
+/* ── Barras de Progresso ── */
+.progresso-item { margin-bottom: 1.8rem; }
+.progresso-header { display:flex; justify-content:space-between; margin-bottom:0.6rem; }
+.progresso-label { font-size:0.9rem; font-weight:500; color:var(--cor-texto); }
+.progresso-valor { font-family:var(--fonte-titulo); font-size:0.9rem; font-weight:700; color:var(--cor-verde); }
+.progresso-barra { height:6px; background:var(--cor-verde-suave); border-radius:100px; overflow:hidden; }
+.progresso-fill  { height:100%; background:linear-gradient(90deg,var(--cor-verde-escuro),var(--cor-verde)); border-radius:100px; transition:width 1.2s cubic-bezier(0.4,0,0.2,1); }
+
+/* ── Imagem de seção ── */
+.secao-imagem { width:100%; max-height:320px; object-fit:cover; border-radius:var(--raio-lg); border:1px solid var(--cor-borda); display:block; margin:2rem 0; opacity:0.85; transition:var(--transicao); }
+.secao-imagem:hover { opacity:1; box-shadow:var(--sombra-verde); }
+.imagem-legenda { font-size:0.78rem; color:var(--cor-texto-suave); text-align:center; margin-top:-1.5rem; margin-bottom:2rem; font-style:italic; }

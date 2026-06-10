@@ -1,61 +1,58 @@
+# 🛰️ AgroSat — Web Development (React + Vite)
+
 **Global Solution 2026 · FIAP · Engenharia de Software · 1º Ano**
-
-> Plataforma que conecta dados orbitais abertos (NASA, ESA, INPE) à realidade do agricultor brasileiro, entregando alertas precisos sobre saúde da lavoura, déficit hídrico e pragas.
-
----
 
 ## 👥 Integrantes
 
-Yuri Aroste Fukamachi - RM:567314
-Michel Lima Benchimol - RM567345
+| Nome                    | RM     |
+|-------------------------|--------|
+| Michel Lima Benchimol   | 567345 |
+| Yuri Aroste Fukamachi   | 567314 |
 
-**Turma:** 1ESPR
+**Turma:** 1ESOA · Agosto 2026
 
----
+## 🚀 Instalação e execução
 
-## Páginas
+```bash
+npm install
+npm run dev
+```
 
-| Página | Descrição |
-| `index.html` | O Problema — contexto, dados de impacto, ODS |
-| `tecnologia.html` | Tecnologia — stack, arquitetura, diagrama, mockup |
-| `objetivos.html` | Objetivos — metas do projeto, barras de progresso |
-| `beneficios.html` | Benefícios — impacto econômico, ambiental e social |
-| `aplicacao.html` | Aplicação — fluxo passo a passo, história do João |
-| `beta.html` | Beta — simulação do software |
+Acesse em: `http://localhost:5173`
 
----
+## Build de produção
 
-## Tecnologias Utilizadas
+```bash
+npm run build
+```
 
-- HTML5 semântico
-- CSS3 com variáveis, Flexbox, animações e responsividade
-- JavaScript puro (Intersection Observer, contadores animados)
-- Google Fonts: Syne + DM Sans
-- Reset CSS próprio
+## 📁 Estrutura
 
----
+```
+src/
+├── components/
+│   ├── Navbar.jsx     — Navegação com React Router DOM
+│   └── Footer.jsx     — Rodapé padrão
+├── pages/
+│   ├── Problema.jsx   — Página 1: O Problema
+│   ├── Tecnologia.jsx — Página 2: Stack Tecnológico
+│   ├── Objetivos.jsx  — Página 3: Metas e barras de progresso
+│   ├── Beneficios.jsx — Página 4: Impacto e perfis
+│   ├── Aplicacao.jsx  — Página 5: Fluxo e timeline
+│   └── Beta.jsx       — Página 6: Dashboard de talhões
+├── data/
+│   └── dados.json     — Dados fictícios locais
+├── style.css          — CSS principal do projeto
+├── reset.css          — Reset CSS
+└── main.jsx           — Entry point
+```
 
-## Como rodar localmente
+## ✅ Critérios atendidos
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/Benchicode/GS-FIAP-2026-Agrosat.git
-   ```
-2. Abra o arquivo `index.html` no navegador — sem necessidade de servidor.
+- **Cards com dados da ideia** — cards de problemas, tecnologias, objetivos, benefícios e talhões vindos do `dados.json`
+- **React Router DOM** — 6 rotas: `/`, `/tecnologia`, `/objetivos`, `/beneficios`, `/aplicacao`, `/beta`
+- **JSON local** — `src/data/dados.json` com todos os dados fictícios
 
----
+## 🌐 Deploy
 
-## Deploy
-
-https://github.com/Benchicode/GS-FIAP-2026-Agrosat.git
-
-https://gsagrosat.vercel.app
-
----
-
-## ODS Conectados
-
-- **ODS 2** — Fome zero e agricultura sustentável
-- **ODS 9** — Inovação e infraestrutura
-- **ODS 10** — Redução das desigualdades
-- **ODS 13** — Ação climática
+🔗 [Ver site ao vivo](#) — substituir pelo link do Vercel/GitHub Pages
