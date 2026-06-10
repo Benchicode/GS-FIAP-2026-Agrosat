@@ -1,8 +1,8 @@
-# 🛰️ AgroSat — Web Development (React + Vite)
+## AgroSat — Web Development (React + Vite)
 
 **Global Solution 2026 · FIAP · Engenharia de Software · 1º Ano**
 
-## 👥 Integrantes
+## Integrantes
 
 | Nome                    | RM     |
 |-------------------------|--------|
@@ -11,7 +11,7 @@
 
 **Turma:** 1ESRP · Agosto 2026
 
-## 🚀 Instalação e execução
+## Instalação e execução
 
 ```bash
 npm install
@@ -26,7 +26,7 @@ Acesse em: `http://localhost:5173`
 npm run build
 ```
 
-## 📁 Estrutura
+## Estrutura
 
 ```
 src/
@@ -47,7 +47,7 @@ src/
 └── main.jsx           — Entry point
 ```
 
-## ✅ Critérios atendidos
+## Critérios atendidos
 
 - **Cards com dados da ideia** — cards de problemas, tecnologias, objetivos, benefícios e talhões vindos do `dados.json`
 - **React Router DOM** — 6 rotas: `/`, `/tecnologia`, `/objetivos`, `/beneficios`, `/aplicacao`, `/beta`
