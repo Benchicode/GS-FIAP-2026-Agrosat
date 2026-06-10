@@ -9,7 +9,7 @@
 | Michel Lima Benchimol   | 567345 |
 | Yuri Aroste Fukamachi   | 567314 |
 
-**Turma:** 1ESOA · Agosto 2026
+**Turma:** 1ESRP · Agosto 2026
 
 ## 🚀 Instalação e execução
 
